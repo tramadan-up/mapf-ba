@@ -1,0 +1,1 @@
+position(2,(3,1),0). position(2,(3,2),1). position(2,(3,3),2). position(2,(3,4),3). position(2,(3,5),4). 
