@@ -1,1 +1,1 @@
-checkpoint(1,(5,4)). position(1,(1,3),0). occurs(object(robot,1),action(move,(1,0)),1). occurs(object(robot,1),action(move,(1,0)),2). occurs(object(robot,1),action(move,(0,1)),3). occurs(object(robot,1),action(move,(1,0)),4). occurs(object(robot,1),action(move,(1,0)),5). occurs(object(robot,1),action(move,(0,-1)),6). position(1,(2,3),1). position(1,(3,3),2). position(1,(3,4),3). position(1,(4,4),4). position(1,(5,4),5). position(1,(5,3),6).
+UNSATISFIABLE
