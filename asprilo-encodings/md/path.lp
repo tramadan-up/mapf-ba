@@ -15,7 +15,7 @@
 time(1..horizon).
 % import
 robot(R) :- robot(R,G), G==grp.
-
+robot(R) :- position(R,_,_).
 position(R,(X,Y),0) :- robot(R,G), init(object(robot,R),value(at,(X,Y))), G==grp.
 position((X,Y),S) :- shelf(S,G), init(object(shelf,S),value(at,(X,Y))), G==grp.
 goal_position(R,(X,Y),S) :- robot(R), position((X,Y),S), shelf(S,G), R==S, G==grp.
@@ -24,13 +24,13 @@ goal(R,C) :- goal_position(R,C,_).
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
 nextto((X,Y),(DX,DY),(X',Y')) :- direction((DX,DY)), position_((X,Y),G), position_((X',Y'),G), (X,Y)=(X'-DX,Y'-DY), (X',Y')=(X+DX,Y+DY), G==grp.
 % movement and positions
-{ move(R,D,T) : direction(D)} 1 :- robot(R), time(T).
+{ move(R,D,T) : direction(D)} 1 :- robot(R,G), time(T), G==grp.
 
 position(R,C,T) :- move(R,D,T), position(R,C',T-1),     nextto(C',D,C).
                 :- move(R,D,T), position(R,C ,T-1), not nextto(C ,D,_).
 
-position(R,C,T) :- position(R,C,T-1), not move(R,_,T), robot(R), time(T).
-moveto(C',C,T) :- nextto(C',D,C), position(R,C',T-1), move(R,D,T).
+position(R,C,T) :- position(R,C,T-1), not move(R,_,T), robot(R,G), time(T), G==grp.
+moveto(C',C,T) :- nextto(C',D,C), position(R,C',T-1), move(R,D,T), robot(R,G), G==grp.
 :- moveto(C',C,T), moveto(C,C',T), C < C'.
 :- { position(R,C,T) : robot(R) }  > 1, position_(C,G), time(T), G==grp.
 :- { position(R,C,T) } != 1, robot(R), time(T).

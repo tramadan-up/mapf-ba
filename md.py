@@ -60,15 +60,16 @@ def plan(plan, groups, man_dis, destination_path, time):
     destination_file = open(destination_path, "r")
     destination = destination_file.read()
     destination_file.close()
-
+    act=""
 
     for i in groups:
         solution = ""
-        asp = ""
+        #asp_ = ""
         grp = "#const grp = {}.".format(i)
-        asp = destination + grp
+        #asp = destination + grp + act
         for j in range(man_dis,man_dis*2):
             horizon = "#const horizon = {}.".format(j)
+            asp = destination + grp + act
             asp = asp + horizon
             ctl = clingo.Control(['--stats'])
             ctl.add("base", [], asp)
@@ -79,23 +80,25 @@ def plan(plan, groups, man_dis, destination_path, time):
                 handle.get()
                 solution = solution.replace(' ', '. ')
             if solution:
+                act=act+solution
                 time.append(float(dumps(ctl.statistics['summary']['times']['total'], sort_keys=True, indent=4, separators=(',', ': '))))
                 plans.append(solution)
                 break
     return plans, time
 
 
-enc1 = "./asprilo-encodings/group/path.lp"                      # pathfinding encoding
-enc2 = "./asprilo-encodings/prep/group.lp"                      # preparation encoding
+enc1 = "./asprilo-encodings/md/path.lp"                      # pathfinding encoding
+enc2 = "./asprilo-encodings/prep/md.lp"                      # preparation encoding
 abst = sys.argv[1]                                              # user input - instance/abstraction
-dest1 = "./solution/group/combined_instance.lp"                       # temporary file: instance
-dest2 = "./solution/group/combined_prep.lp"                           # temporary file: preparation
-dest3 = "./solution/group/prep.lp"                                    # processed instance
-dest4 = "./solution/group/plan.lp"                                    # solution
+dest1 = "./solution/md/combined_instance.lp"                       # temporary file: instance
+dest2 = "./solution/md/combined_prep.lp"                           # temporary file: preparation
+dest3 = "./solution/md/prep.lp"                                    # processed instance
+dest4 = "./solution/md/plan.lp"                                    # solution
 
 time=[]
 plans=[]
 md=[]                                                           # manhattan distances
+gr=[]
 
 combine(enc2,abst,dest2)                                        # combine preparation encoding with abstarction
 prep_, groups, man_dis, time = prep(dest2, time)                # perform preparation on combined files, extract solution, grouping, manhattan distances and time
@@ -104,14 +107,21 @@ combine(enc1,dest3,dest1)                                       # combine pathfi
 
 
 for i in range(len(groups)):
-    groups[i] = int(groups[i].strip('()'))                      # process information on grouping
+    x,y = map(int, groups[i].strip('()').split(','))            # process information on grouping
+    gr.append([x,y])
+gr_sorted = sorted(gr, key=lambda tup: tup[1], reverse=True)    # sort groups
+for i in range(len(gr_sorted)):
+    gr[i]=gr_sorted[i][0]
+
 
 for i in range(len(man_dis)):
     x,y = map(int, man_dis[i].strip('()').split(','))           # process information on manhattan distances
     md.append(y)
 max_md = max(md)                                                # determine highest manhattan distance
 
-plans, time = plan(plans, groups, max_md, dest1, time)          # plan
+
+
+plans, time = plan(plans, gr, max_md, dest1, time)          # plan
 save_plans(plans, dest4)                                        # save plans
 print(sum(time))
 

@@ -86,12 +86,12 @@ def plan(plan, groups, man_dis, destination_path, time):
 
 
 enc1 = "./asprilo-encodings/group/path.lp"                      # pathfinding encoding
-enc2 = "./asprilo-encodings/prep/group.lp"                      # preparation encoding
-abst = sys.argv[1]                                              # user input - instance/abstraction
-dest1 = "./solution/group/combined_instance.lp"                       # temporary file: instance
-dest2 = "./solution/group/combined_prep.lp"                           # temporary file: preparation
-dest3 = "./solution/group/prep.lp"                                    # processed instance
-dest4 = "./solution/group/plan.lp"                                    # solution
+enc2 = "./asprilo-encodings/prep/all.lp"                      # preparation encoding
+abst = sys.argv[1]                                             # user input - instance/abstraction
+dest1 = "./solution/all/combined_instance.lp"                       # temporary file: instance
+dest2 = "./solution/all/combined_prep.lp"                           # temporary file: preparation
+dest3 = "./solution/all/prep.lp"                                    # processed instance
+dest4 = "./solution/all/plan.lp"                                    # solution
 
 time=[]
 plans=[]

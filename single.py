@@ -184,7 +184,7 @@ def plan(robots, destination, collision, paths, plan_, actions, time, restrictio
     return plan_, time
 
 enc1 = "./asprilo-encodings/single/path.lp"                  # pathfinding encoding
-enc2 = "./asprilo-encodings/single/prep.lp"                  # preparation encoding
+enc2 = "./asprilo-encodings/prep/single.lp"                  # preparation encoding
 ben = sys.argv[1]                                               # user input - instance/abstraction
 dest1 = "./solution/single/combined_instance.lp"             # temporary file: instance
 dest2 = "./solution/single/combined_prep.lp"                 # temporary file: preparation
