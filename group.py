@@ -80,6 +80,7 @@ def plan(plan, groups, man_dis, destination_path, time):
                 solution = solution.replace(' ', '. ')
             if solution:
                 time.append(float(dumps(ctl.statistics['summary']['times']['total'], sort_keys=True, indent=4, separators=(',', ': '))))
+                #print(dumps(ctl.statistics, sort_keys=True, indent=4, separators=(',', ': ')))
                 plans.append(solution)
                 break
     return plans, time
