@@ -30,11 +30,15 @@ position(R,C,T) :- move(R,D,T), position(R,C',T-1),     nextto(C',D,C).
                 :- move(R,D,T), position(R,C ,T-1), not nextto(C ,D,_).
 
 position(R,C,T) :- position(R,C,T-1), not move(R,_,T), robot(R,G), time(T), G==grp.
+:- position(R1,(X,Y),T), position(R2,(X',Y'),T), position(R1,(X',Y'),T+1), position(R2,(X,Y),T+1), R1!=R2.
 moveto(C',C,T) :- nextto(C',D,C), position(R,C',T-1), move(R,D,T), robot(R,G), G==grp.
 :- moveto(C',C,T), moveto(C,C',T), C < C'.
 :- { position(R,C,T) : robot(R) }  > 1, position_(C,G), time(T), G==grp.
 :- { position(R,C,T) } != 1, robot(R), time(T).
 :- position(R,C,horizon), goal(R,C'), C!=C'.
+
+%:- position(R1,(X,Y),T), position(R2,(X,Y),T), R1!=R2.
+
 
 #show.
 #show position/3.
