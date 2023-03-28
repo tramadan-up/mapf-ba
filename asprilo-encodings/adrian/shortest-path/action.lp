@@ -28,4 +28,3 @@ imp_position(R,C,T) :- position(R,C,T), isRobot(robot(R)). %MODIFIED
 
 
 
-

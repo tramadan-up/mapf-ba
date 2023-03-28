@@ -79,7 +79,7 @@ def solving(combined,i,nodecount):
 		print(solution)
 	else:
 		print("UNSATISFIABLE")
-	#print("Solution time: " + str(end - start) + "s")	MODIFIED
+	#print("Solution time: " + str(end - start) + "s") MODIFIED
 
 
 

@@ -43,4 +43,4 @@ moveto(C',C,T) :- nextto(C',D,C), position(R,C',T-1), move(R,D,T).
 #show position/3.
 %#show occurs(object(robot,R), action(move,D),     T) :    move(R,D,T).
 #show occurs(object(robot,R),action(move,(DX,DY)),T) : position(R,(X',Y'),T+1), position(R,(X,Y),T), nextto((X,Y),(DX,DY),(X',Y')).
-#show occurs/3.
+%#show occurs/3.

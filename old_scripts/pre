@@ -1,0 +1,13 @@
+? problems that arise when grouping up robots
+
+?? group too big / too small
+??? split up / combine
+???? subareas of beacons 
+???? small distinct groups planned together
+
+?? how to plan for groups that cross paths
+??? if possible detour (maybe togglable even for comparison)
+???? if possible groups beacons can't be the same
+??? plan seperately after another 
+???? depends on group size, manhattan distance
+??? plan together

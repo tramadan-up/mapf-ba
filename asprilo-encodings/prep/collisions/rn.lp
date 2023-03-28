@@ -64,7 +64,7 @@ grpd(G,R) :- group(G), share(G,R).
 robot(R,G) :- grpd(G,R).
 shelf(S,G) :- grpd(G,S).
 
-position_((X,Y),G) :- imp_position(R,(X,Y)), init(object(node,N),value(at,(X,Y))), grpd(G,R).
+position_((X,Y),G) :- imp_position(R,(X,Y),0), init(object(node,N),value(at,(X,Y))), grpd(G,R).
 % add nodes
 position_((X+DX,Y+DY),G) :- collision(R,_,(X,Y),_), init_(object(node,N),value(at,(X+DX,Y+DY))), direction((DX,DY)), grpd(G,R).
 

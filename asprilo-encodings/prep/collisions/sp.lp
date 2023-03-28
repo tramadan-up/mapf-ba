@@ -6,9 +6,9 @@ robot(R) :- new_init(object(robot,R),value(at,(X,Y))).
 
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
 nextto((X,Y),(DX,DY),(X',Y')) :- direction((DX,DY)), imp_position(_,(X,Y),_), imp_position(_,(X',Y'),_), (X,Y)=(X'-DX,Y'-DY), (X',Y')=(X+DX,Y+DY).
+
 % detect coliisions
 collision(R1,R2,(X,Y),T) :- imp_position(R1,(X,Y),T), imp_position(R2,(X,Y),T), R1!=R2.
-
 collision(R1,R2,(X,Y),T) :- imp_position(R1,(X,Y),T), imp_position(R2,(X',Y'),T), imp_position(R1,(X',Y'),T+1), imp_position(R2,(X,Y),T+1), R1!=R2.
 
 % group up robots
@@ -17,7 +17,6 @@ robot_c(R) :- robot(R), not robot_cf(R).
 
 % positions of robots not involved in collisions
 position(R,(X,Y),T) :- imp_position(R,(X,Y),T), robot_cf(R).
-
 
 % group robots sharing collision node
 1{share(R,R')} :- collision(R,R',_,_).

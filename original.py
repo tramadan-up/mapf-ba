@@ -115,10 +115,11 @@ save_plans(plans, dest4)                                        # save plans
 print("Grounding: " + str(sum(time)-sum(solve)))
 print("Solving: " + str(sum(solve)))
 print("Total: " + str(sum(time)))
-
+"""
 try:                                                            # delete temporary files
     os.remove(dest1)
     os.remove(dest2)
 except OSError as e:
     print("Error: %s : %s" % (dest1, e.strerror))
     print("Error: %s : %s" % (dest2, e.strerror))
+"""

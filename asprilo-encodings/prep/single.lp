@@ -4,7 +4,7 @@ init(object(shelf,S),value(at,(X,Y))) :- new_init(object(shelf,S),value(at,(X,Y)
 init(object(robot,R),value(at,(X,Y))) :- new_init(object(robot,R),value(at,(X,Y))).
 init(object(node,N),value(at,(X,Y))) :- new_init(object(node,N),value(at,(X,Y))).
 rbt(R) :- new_init(object(robot,R),value(at,(X,Y))).
-
+goal(R,C) :- rbt(R), init(object(shelf,S),value(at,C)), R==S.
 % calculate manhattan distance
 md(R,D) :- init(object(robot,R),value(at,(X,Y))), init(object(shelf,S),value(at,(X',Y'))), R==S, D=|X-X'|+|Y-Y'|.
 
@@ -13,4 +13,5 @@ md(R,D) :- init(object(robot,R),value(at,(X,Y))), init(object(shelf,S),value(at,
 #show init/2.
 #show rbt/1.
 #show md/2.
+#show goal/2.
 %#show imp_position/2.
